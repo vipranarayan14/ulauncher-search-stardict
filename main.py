@@ -13,9 +13,9 @@ logger = logging.getLogger(__name__)
 
 class SearchDictionary(Extension):
     def __init__(self):
-        super().__init__()
+        super(SearchDictionary, self).__init__()
 
-        self._load_dict()
+        # self._load_dict()
         self.subscribe(KeywordQueryEvent, KeywordQueryEventListener())
 
     def _load_dict(self):
