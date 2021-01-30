@@ -40,7 +40,7 @@ class KeywordQueryEventListener(EventListener):
 
             return RenderResultListAction(items)
 
-        if os.path.exists(f'{dict_path}.dic'):
+        if not os.path.exists(f'{dict_path}.dic'):
             items.append(
                 ExtensionResultItem(
                     icon="images/icon.png",
