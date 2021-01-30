@@ -28,12 +28,13 @@ class KeywordQueryEventListener(EventListener):
         items = []
 
         query = event.get_argument() or ""
+        dict_path = extension.preferences["dict_path"]
 
         items.append(
             ExtensionResultItem(
                 icon="images/icon.png",
                 name="Query",
-                description=f"description: {query} + {query} hi",
+                description=f"description: {query} + {dict_path} hi",
                 on_enter=HideWindowAction(),
             )
         )
