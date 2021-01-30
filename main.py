@@ -1,4 +1,6 @@
 import logging
+import os
+
 from ulauncher.api.client.Extension import Extension
 from ulauncher.api.client.EventListener import EventListener
 from ulauncher.api.shared.event import KeywordQueryEvent
@@ -24,6 +26,32 @@ class KeywordQueryEventListener(EventListener):
 
         query = event.get_argument() or ""
         dict_path = extension.preferences["dict_path"] or ""
+
+        if not dict_path:
+            items.append(
+                ExtensionResultItem(
+                    icon="images/icon.png",
+                    name="Configure",
+                    description="Configure path to the dictionary file \n Configure path to the dictionary file \n "
+                                "Configure path to the dictionary file",
+                    on_enter=HideWindowAction(),
+                )
+            )
+
+            return RenderResultListAction(items)
+
+        if os.path.exists(f'{dict_path}.dic'):
+            items.append(
+                ExtensionResultItem(
+                    icon="images/icon.png",
+                    name="Invalid dictionary file",
+                    description="Either the configured dictionary path is invalid or the path does not contain "
+                                "StarDict files",
+                    on_enter=HideWindowAction(),
+                )
+            )
+
+            return RenderResultListAction(items)
 
         items.append(
             ExtensionResultItem(
