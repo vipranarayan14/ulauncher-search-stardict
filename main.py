@@ -1,4 +1,5 @@
 import logging
+import json
 from ulauncher.api.client.Extension import Extension
 from ulauncher.api.client.EventListener import EventListener
 from ulauncher.api.shared.event import KeywordQueryEvent
@@ -29,7 +30,7 @@ class KeywordQueryEventListener(EventListener):
         items = []
 
         query = event.get_argument() or ""
-        dict_path = extension["dict_path"]
+        dict_path = json.dumps(extension)
 
         items.append(
             ExtensionResultItem(
