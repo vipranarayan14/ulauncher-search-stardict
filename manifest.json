@@ -1,7 +1,7 @@
 {
   "required_api_version": "^2.0.0",
-  "name": "StarDict Dictionaries Search",
-  "description": "Search StarDict dictionaries extension for ulauncher",
+  "name": "StarDict Lookup",
+  "description": "Lookup in StarDict dictionaries -- extension for Ulauncher",
   "developer_name": "Prasanna Venkatesh T S",
   "icon": "images/icon.png",
   "options": {
@@ -11,14 +11,14 @@
     {
       "id": "search-dictionary",
       "type": "keyword",
-      "name": "Search Dictionary",
+      "name": "Search dictionary",
       "default_value": "sd"
     },
     {
       "id": "dict_path",
       "type": "input",
-      "name": "Absolute path to the StarDict dictionary file",
-      "description": "Example: '/home/user/dictdata/StarDict English/stardict-english' (without the extension [.dic, .ifo, etc.]).",
+      "name": "Dictionary path",
+      "description": "Absolute path to the StarDict dictionary file.\nExample: '/home/user/dictdata/StarDict English/stardict-english' (without the extension .dict).",
       "default_value": ""
     }
   ]
