@@ -18,7 +18,7 @@
       "id": "dict_path",
       "type": "input",
       "name": "Dictionary path",
-      "description": "Absolute path to the StarDict dictionary file.\nExample: '/home/user/dictdata/StarDict English/stardict-english' (without the extension .dict).",
+      "description": "Absolute path to the StarDict dictionary file. <br/> Example: <code>'/home/user/dictdata/StarDict English/stardict-english'</code> (without the extension .dict).",
       "default_value": ""
     }
   ]
