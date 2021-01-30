@@ -32,7 +32,8 @@ class KeywordQueryEventListener(EventListener):
                 ExtensionResultItem(
                     icon="images/icon.png",
                     name="Dictionary path not configured!",
-                    description="Configure path to the dictionary file",
+                    description="Configure path to the dictionary file in\n"
+                                "Ulauncher > Extensions > StarDict Lookup > Dictionary path",
                     on_enter=HideWindowAction(),
                 )
             )
@@ -45,7 +46,7 @@ class KeywordQueryEventListener(EventListener):
                     icon="images/icon.png",
                     name="Invalid dictionary file!",
                     description="Either the configured dictionary path is invalid\n"
-                                "or the path does not contain StarDict files",
+                                "or the path does not contain StarDict files.",
                     on_enter=HideWindowAction(),
                 )
             )
