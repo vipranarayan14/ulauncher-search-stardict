@@ -31,15 +31,15 @@ class KeywordQueryEventListener(EventListener):
             items.append(
                 ExtensionResultItem(
                     icon="images/icon.png",
-                    name="Configure",
-                    description="Configure path to the dictionary file\n" * 10,
+                    name="Dictionary path not configured!",
+                    description="Configure path to the dictionary file",
                     on_enter=HideWindowAction(),
                 )
             )
 
             return RenderResultListAction(items)
 
-        if not os.path.exists(f'{dict_path}.dic'):
+        if not os.path.exists(f'{dict_path}.dict'):
             items.append(
                 ExtensionResultItem(
                     icon="images/icon.png",
