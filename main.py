@@ -6,7 +6,7 @@ from ulauncher.api.shared.item.ExtensionResultItem import ExtensionResultItem
 from ulauncher.api.shared.action.RenderResultListAction import RenderResultListAction
 from ulauncher.api.shared.action.HideWindowAction import HideWindowAction
 
-from search import initDictionary, search
+# from search import initDictionary, search
 
 logger = logging.getLogger(__name__)
 
@@ -15,10 +15,10 @@ class SearchDictionary(Extension):
     def __init__(self):
         super(SearchDictionary, self).__init__()
 
-        dict_path = self.preferences["dict_path"]
+        # dict_path = self.preferences["dict_path"]
 
-        self.dict_path = dict_path
-        self.dictionary = initDictionary(dict_path)
+        # self.dict_path = dict_path
+        # self.dictionary = initDictionary(dict_path)
 
         self.subscribe(KeywordQueryEvent, KeywordQueryEventListener())
 
@@ -33,7 +33,7 @@ class KeywordQueryEventListener(EventListener):
             ExtensionResultItem(
                 icon="images/icon.png",
                 name="Query",
-                description=f"description: {query} \n {extension.dict_path}",
+                description=f"description: {query}",
                 on_enter=HideWindowAction(),
             )
         )
