@@ -20,11 +20,14 @@ class SearchDictionary(Extension):
 class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
         items = []
+
+        query = event.get_argument() or ""
+
         items.append(
             ExtensionResultItem(
                 icon="images/icon.png",
-                name="name",
-                description="description",
+                name="Query",
+                description=f"description: {query}",
                 on_enter=HideWindowAction(),
             )
         )
