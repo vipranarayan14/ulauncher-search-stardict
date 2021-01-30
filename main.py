@@ -16,7 +16,8 @@ class SearchDictionary(Extension):
     def __init__(self):
         super(SearchDictionary, self).__init__()
 
-        self._load_dict()
+        logger.info("hello-1234567")
+        # self._load_dict()
         self.subscribe(KeywordQueryEvent, KeywordQueryEventListener())
 
     def _load_dict(self):
