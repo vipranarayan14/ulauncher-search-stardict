@@ -53,11 +53,25 @@ class KeywordQueryEventListener(EventListener):
 
             return RenderResultListAction(items)
 
+        if not query:
+            items.append(
+                ExtensionResultItem(
+                    icon="images/icon.png",
+                    name="Type a word...",
+                    on_enter=HideWindowAction(),
+                )
+            )
+
+            return RenderResultListAction(items)
+
+        dictionary = initDictionary(dict_path)
+        result = search(dictionary, query)
+
         items.append(
             ExtensionResultItem(
                 icon="images/icon.png",
-                name="Query",
-                description=f"description: {query} + {dict_path} hi",
+                name=query,
+                description=result,
                 on_enter=HideWindowAction(),
             )
         )
