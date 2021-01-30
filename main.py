@@ -1,5 +1,4 @@
 import logging
-import json
 from ulauncher.api.client.Extension import Extension
 from ulauncher.api.client.EventListener import EventListener
 from ulauncher.api.shared.event import KeywordQueryEvent
@@ -14,14 +13,15 @@ logger = logging.getLogger(__name__)
 
 class SearchDictionary(Extension):
     def __init__(self):
-        super(SearchDictionary, self).__init__()
+        super().__init__()
 
-        logger.info("hello-1234567")
-        # self._load_dict()
+        self._load_dict()
         self.subscribe(KeywordQueryEvent, KeywordQueryEventListener())
 
     def _load_dict(self):
         dict_path = self.preferences["dict_path"] or ""
+
+        print("hellohello")
 
         self.dict_path = dict_path or "dict_path"
         # self.dictionary = initDictionary(dict_path)
