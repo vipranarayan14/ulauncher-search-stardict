@@ -16,6 +16,7 @@ class SearchDictionary(Extension):
     def __init__(self):
         super(SearchDictionary, self).__init__()
 
+        self._load_dict()
         self.subscribe(KeywordQueryEvent, KeywordQueryEventListener())
 
     def _load_dict(self):
@@ -30,13 +31,13 @@ class KeywordQueryEventListener(EventListener):
         items = []
 
         query = event.get_argument() or ""
-        dict_path = json.dumps(extension)
+        # dict_path = json.dumps(extension)
 
         items.append(
             ExtensionResultItem(
                 icon="images/icon.png",
                 name="Query",
-                description=f"description: {query} + {dict_path} hi",
+                description=f"description: {query} hi",
                 on_enter=HideWindowAction(),
             )
         )
