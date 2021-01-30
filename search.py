@@ -1,18 +1,18 @@
-# import stargaze
-
-# dict = stargaze.Dictionary("/home/prasanna/App Files/data/dictdata/apte-1890")
-
-# result = dict.lookup("गुरु")
-
-# print(result)
-
 from pystardict import Dictionary
 
-dict = Dictionary(
-    "/home/prasanna/App Files/data/dictdata/shabda-sAgara/shabda-sAgara",
-    in_memory=False,
-)
 
-result = dict.dict["प्रश्न"]
+def initDictionary(dict_path):
+    return Dictionary(dict_path)
 
-print(result)
+
+def search(dictionary, query):
+    return dictionary.dict[query]
+
+
+# _dict = initDictionary(
+#     dic_path="/home/prasanna/App Files/data/dictdata/shabda-sAgara/shabda-sAgara"
+# )
+
+# result = search(_dict, "गुरु")
+
+# print(result)
