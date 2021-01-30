@@ -8,7 +8,7 @@ from ulauncher.api.shared.item.ExtensionResultItem import ExtensionResultItem
 from ulauncher.api.shared.action.RenderResultListAction import RenderResultListAction
 from ulauncher.api.shared.action.HideWindowAction import HideWindowAction
 
-from search import initDictionary, search
+from search import initDictionary, search, WordNotInDictionary
 
 logger = logging.getLogger(__name__)
 
@@ -65,7 +65,11 @@ class KeywordQueryEventListener(EventListener):
             return RenderResultListAction(items)
 
         dictionary = initDictionary(dict_path)
-        result = search(dictionary, query)
+
+        try:
+            result = search(dictionary, query)
+        except WordNotInDictionary:
+            result = 'Word not found in dictionary'
 
         items.append(
             ExtensionResultItem(
