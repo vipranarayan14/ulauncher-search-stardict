@@ -17,7 +17,7 @@ class SearchDictionary(Extension):
 
         dict_path = self.preferences["dict_path"] or ""
 
-        self.dict_path = dict_path
+        # self.dict_path = dict_path
         # self.dictionary = initDictionary(dict_path)
 
         self.subscribe(KeywordQueryEvent, KeywordQueryEventListener())
