@@ -15,7 +15,7 @@ class SearchDictionary(Extension):
     def __init__(self):
         super(SearchDictionary, self).__init__()
 
-        dict_path = self.preferences["dict_path"] or ""
+        # dict_path = self.preferences["dict_path"] or ""
 
         # self.dict_path = dict_path
         # self.dictionary = initDictionary(dict_path)
