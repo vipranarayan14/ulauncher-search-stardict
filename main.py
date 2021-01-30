@@ -33,7 +33,7 @@ class KeywordQueryEventListener(EventListener):
             ExtensionResultItem(
                 icon="images/icon.png",
                 name="Query",
-                description=f"description: {query} + {extension.dict_path}",
+                description=f"description: {query} + {query} hi",
                 on_enter=HideWindowAction(),
             )
         )
