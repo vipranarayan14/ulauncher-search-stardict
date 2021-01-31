@@ -68,16 +68,18 @@ class KeywordQueryEventListener(EventListener):
 
         try:
             result = dictionary.lookup(query)
-            desc = f"{result}\n\n"
+            desc = f"\n{result}\n\n"
         except dictionary.WordNotFound:
             desc = 'Word not found in dictionary.'
 
-        return RenderResultListAction(ExtensionResultItem(
-            icon="images/icon.png",
-            name=query,
-            description=desc,
-            on_enter=HideWindowAction()
-        ))
+        return RenderResultListAction([
+            ExtensionResultItem(
+                icon="images/icon.png",
+                name=query,
+                description=desc,
+                on_enter=HideWindowAction()
+            )
+        ])
 
 
 if __name__ == "__main__":
