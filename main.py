@@ -67,16 +67,23 @@ class KeywordQueryEventListener(EventListener):
         dictionary = initDictionary(dict_path)
 
         try:
-            result = f"{search(dictionary, query)}\n\n"
-        except WordNotInDictionary:
-            result = 'Word not found in dictionary'
+            result = search(dictionary, query)
+            formatted_result = [string.strip() for string in result.split('\n')]
 
-        items = [ExtensionResultItem(
-            icon="images/icon.png",
-            name=query,
-            description=result,
-            on_enter=HideWindowAction(),
-        )]
+            items = [ExtensionResultItem(
+                icon="images/icon.png",
+                name=query,
+                description=item_desc,
+                on_enter=HideWindowAction(),
+            ) for item_desc in formatted_result]
+
+        except WordNotInDictionary:
+            items = [ExtensionResultItem(
+                icon="images/icon.png",
+                name=query,
+                description='Word not found in dictionary',
+                on_enter=HideWindowAction(),
+            )]
 
         return RenderResultListAction(items)
 
