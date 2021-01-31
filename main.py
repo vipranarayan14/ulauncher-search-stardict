@@ -44,12 +44,16 @@ class SearchDictionary(Extension):
 
 
 class KeywordQueryEventListener(EventListener):
-    def on_event(event, extension):
+    def on_event(self, event, extension):
 
         dict_path = extension.preferences["dict_path"] or ""
 
         if not dict_path:
-            return message_dictionary_path_not_configured
+            return message(
+                name="Dictionary path not configured!",
+                description="Configure path to the dictionary file in\n"
+                            "Ulauncher > Extensions > StarDict Lookup > Dictionary path"
+            )
 
         dict_file_path = f'{dict_path}.dict'
 
