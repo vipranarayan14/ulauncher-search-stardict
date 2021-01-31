@@ -13,6 +13,29 @@ from search import initDictionary, search, WordNotInDictionary
 logger = logging.getLogger(__name__)
 
 
+def message(name, description):
+    return RenderResultListAction([
+        ExtensionResultItem(
+            name,
+            description,
+            icon="images/icon.png",
+        )
+    ])
+
+
+message_dictionary_path_not_configured = message(
+    name="Dictionary path not configured!",
+    description="Configure path to the dictionary file in\n"
+                "Ulauncher > Extensions > StarDict Lookup > Dictionary path"
+)
+
+message_invalid_dictionary_file = message(
+    name="Invalid dictionary file!",
+    description="Either the configured dictionary path is invalid\n"
+                "or the path does not contain StarDict files.",
+)
+
+
 class SearchDictionary(Extension):
     def __init__(self):
         super(SearchDictionary, self).__init__()
@@ -21,64 +44,39 @@ class SearchDictionary(Extension):
 
 
 class KeywordQueryEventListener(EventListener):
-    def on_event(self, event, extension):
-        items = []
+    def on_event(event, extension):
 
-        query = event.get_argument() or ""
         dict_path = extension.preferences["dict_path"] or ""
 
         if not dict_path:
-            items.append(
-                ExtensionResultItem(
-                    icon="images/icon.png",
-                    name="Dictionary path not configured!",
-                    description="Configure path to the dictionary file in\n"
-                                "Ulauncher > Extensions > StarDict Lookup > Dictionary path",
-                    on_enter=HideWindowAction(),
-                )
-            )
+            return message_dictionary_path_not_configured
 
-            return RenderResultListAction(items)
+        dict_file_path = f'{dict_path}.dict'
 
-        if not os.path.exists(f'{dict_path}.dict'):
-            items.append(
-                ExtensionResultItem(
-                    icon="images/icon.png",
-                    name="Invalid dictionary file!",
-                    description="Either the configured dictionary path is invalid\n"
-                                "or the path does not contain StarDict files.",
-                    on_enter=HideWindowAction(),
-                )
-            )
+        if not os.path.exists(dict_file_path):
+            return message_invalid_dictionary_file
 
-            return RenderResultListAction(items)
+        query = event.get_argument() or ""
 
         if not query:
-            items.append(
-                ExtensionResultItem(
-                    icon="images/icon.png",
-                    name="Type a word...",
-                    on_enter=HideWindowAction(),
-                )
+            return message(
+                name="Type a word to lookup",
+                description=f"Dictionary: {dict_path}"
             )
-
-            return RenderResultListAction(items)
 
         dictionary = initDictionary(dict_path)
 
         try:
-            result = search(dictionary, query)
+            result = f"{search(dictionary, query)}\n\n"
         except WordNotInDictionary:
             result = 'Word not found in dictionary'
 
-        items.append(
-            ExtensionResultItem(
-                icon="images/icon.png",
-                name=query,
-                description=result,
-                on_enter=HideWindowAction(),
-            )
-        )
+        items = [ExtensionResultItem(
+            icon="images/icon.png",
+            name=query,
+            description=result,
+            on_enter=HideWindowAction(),
+        )]
 
         return RenderResultListAction(items)
 
