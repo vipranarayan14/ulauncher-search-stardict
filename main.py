@@ -79,8 +79,6 @@ class KeywordQueryEventListener(EventListener):
 
         except WordNotInDictionary:
             items = [ExtensionResultItem(
-                icon="images/icon.png",
-                name=query,
                 description='Word not found in dictionary',
                 on_enter=HideWindowAction(),
             )]
