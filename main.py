@@ -25,7 +25,7 @@ def message(name, description):
 
 message_dictionary_path_not_configured = message(
     name="Dictionary path not configured!",
-    description="Configure path to the dictionary file in\n"
+    description="Configure path to the dictionary file in:\n"
                 "Ulauncher > Extensions > StarDict Lookup > Dictionary path"
 )
 
@@ -67,23 +67,16 @@ class KeywordQueryEventListener(EventListener):
         dictionary = initDictionary(dict_path)
 
         try:
-            result = search(dictionary, query)
-            formatted_result = [string.strip() for string in result.split('\n')]
-
-            items = [ExtensionResultItem(
-                icon="images/icon.png",
-                name=query,
-                description=item_desc,
-                on_enter=HideWindowAction(),
-            ) for item_desc in formatted_result]
-
+            result = f"{search(dictionary, query)}\n\n"
         except WordNotInDictionary:
-            items = [ExtensionResultItem(
-                description='Word not found in dictionary',
-                on_enter=HideWindowAction(),
-            )]
+            result = 'Word not found in dictionary.'
 
-        return RenderResultListAction(items)
+        return RenderResultListAction(ExtensionResultItem(
+            icon="images/icon.png",
+            name=query,
+            description=result,
+            on_enter=HideWindowAction(),
+        ))
 
 
 if __name__ == "__main__":
